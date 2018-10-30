@@ -13,7 +13,4 @@ COPY --from=build /usr/local/bundle/ /usr/local/bundle/
 
 WORKDIR /app
 VOLUME /app
-
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
+ENTRYPOINT ["/usr/local/bundle/bin/rubocop"]
