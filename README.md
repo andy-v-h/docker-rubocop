@@ -16,7 +16,7 @@ Rubocop binary:
 
 ```
 # Only runs lint cops on only the Gemfile
-docker run --rm --volume "$PWD:/app" --lint Gemfile
+docker run --rm --volume "$PWD:/app" stepahn/rubocop --lint Gemfile
 ```
 
 If a `.rubocop.yml` config file is found in the root of your project, the
