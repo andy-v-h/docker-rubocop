@@ -1,9 +1,15 @@
-FROM ruby:2.4-alpine
-MAINTAINER "Erwan Guyader <taratatach@mozfr.org>"
+ARG RUBY_VERSION=2.5.3-alpine
 
-ARG version=0.51.0
+FROM ruby:${RUBY_VERSION} AS build
+RUN apk add --update \
+  build-base \
+  ruby-dev
 
-RUN gem install rubocop -v ${version}
+ARG VERSION=0.60.0
+RUN gem install rubocop -v ${VERSION}
+
+FROM ruby:${RUBY_VERSION}
+COPY --from=build /usr/local/bundle/ /usr/local/bundle/
 
 WORKDIR /app
 VOLUME /app
