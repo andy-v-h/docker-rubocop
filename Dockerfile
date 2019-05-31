@@ -5,8 +5,18 @@ RUN apk add --update \
   build-base \
   ruby-dev
 
-ARG VERSION=0.60.0
-RUN gem install rubocop -v ${VERSION}
+ARG RUBOCOP_VERSION=0.71.0
+RUN gem install rubocop -v ${RUBOCOP_VERSION}
+
+ARG RUBOCOP_PERFORMANCE_VERSION=1.3.0
+RUN gem install rubocop-performance -v ${RUBOCOP_PERFORMANCE_VERSION}
+
+ARG RUBOCOP_RAILS_VERSION=2.0.0
+RUN gem install rubocop-rails -v ${RUBOCOP_RAILS_VERSION}
+
+ARG RUBOCOP_RSPEC_VERSION=1.33.0
+RUN gem install rubocop-rspec -v ${RUBOCOP_RSPEC_VERSION}
+
 RUN rm -rf /usr/local/bundle/cache/*.gem \
  && find /usr/local/bundle/gems/ -name "*.c" -delete \
  && find /usr/local/bundle/gems/ -name "*.o" -delete
