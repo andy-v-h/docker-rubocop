@@ -5,16 +5,16 @@ RUN apk add --update \
   build-base \
   ruby-dev
 
-ARG RUBOCOP_VERSION=0.90.0
+ARG RUBOCOP_VERSION=1.2.0
 RUN gem install rubocop -v ${RUBOCOP_VERSION}
 
-ARG RUBOCOP_PERFORMANCE_VERSION=1.8.0
+ARG RUBOCOP_PERFORMANCE_VERSION=1.8.1
 RUN gem install rubocop-performance -v ${RUBOCOP_PERFORMANCE_VERSION}
 
-ARG RUBOCOP_RAILS_VERSION=2.8.0
+ARG RUBOCOP_RAILS_VERSION=2.8.1
 RUN gem install rubocop-rails -v ${RUBOCOP_RAILS_VERSION}
 
-ARG RUBOCOP_RSPEC_VERSION=1.43.2
+ARG RUBOCOP_RSPEC_VERSION=2.0.0
 RUN gem install rubocop-rspec -v ${RUBOCOP_RSPEC_VERSION}
 
 RUN rm -rf /usr/local/bundle/cache/*.gem \
