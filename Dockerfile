@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=2.7.1-alpine
+ARG RUBY_VERSION=2.7.2-alpine
 
 FROM ruby:${RUBY_VERSION} AS build
 RUN apk add --update \
