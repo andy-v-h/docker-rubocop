@@ -53,7 +53,7 @@ jobs:
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-  legacy_2.4:
+  legacy_2_4:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     strategy:
