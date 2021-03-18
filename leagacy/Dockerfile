@@ -5,6 +5,9 @@ RUN apk add --update \
   build-base \
   ruby-dev
 
+ARG PARALLEL_VERSION=2
+RUN gem install parallel -v ${PARALLEL_VERSION}
+
 ARG RUBOCOP_VERSION=1.2.0
 RUN gem install rubocop -v ${RUBOCOP_VERSION}
 
