@@ -10,11 +10,23 @@ on:
   pull_request:
 
 jobs:
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  current:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
+    strategy:
+      matrix:
+        rubocop_version: [1.2.0]
+        ruby_version:
+          - 3.0.0-alpine
+          - 2.7.2-alpine
+          - 2.6.6-alpine
+          - 2.5.8-alpine
+          - 2.4.10-alpine
+          - 3.0.0-slim
+          - 2.7.2-slim
+          - 2.6.6-slim
+          - 2.5.8-slim
+          - 2.4.10-slim
 
     steps:
       - 
@@ -35,7 +47,48 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: quay.io/aholtzmann/rubocop:latest
+          tags: quay.io/aholtzmann/rubocop:${{ matrix.rubocop_version }}-${{ matrix.ruby_version }}
+          build-args: |
+            RUBOCOP_VERSION=${{ matrix.rubocop_version }}
+            RUBY_VERSION=${{ matrix.ruby_version }}
+      -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+  legacy-2.3:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    strategy:
+      matrix:
+        rubocop_version: [0.81]
+        ruby_version:
+          - 2.3.8-alpine
+          - 2.3.5-alpine
+          - 2.3.8-slim
+          - 2.3.5-slim
+         
+    steps:
+      - 
+        uses: actions/checkout@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: quay.io/aholtzmann/rubocop:${{ matrix.rubocop_version }}-${{ matrix.ruby_version }}
+          build-args: |
+            RUBOCOP_VERSION=${{ matrix.rubocop_version }}
+            RUBY_VERSION=${{ matrix.ruby_version }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
