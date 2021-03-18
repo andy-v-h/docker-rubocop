@@ -22,11 +22,7 @@ jobs:
           - 2.6.6-alpine
           - 2.5.8-alpine
           - 2.4.10-alpine
-          - 3.0.0-slim
-          - 2.7.2-slim
-          - 2.6.6-slim
-          - 2.5.8-slim
-          - 2.4.10-slim
+
 
     steps:
       - 
@@ -63,8 +59,6 @@ jobs:
         ruby_version:
           - 2.3.8-alpine
           - 2.3.5-alpine
-          - 2.3.8-slim
-          - 2.3.5-slim
          
     steps:
       - 
