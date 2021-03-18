@@ -5,7 +5,7 @@ RUN apk add --update \
   build-base \
   ruby-dev
 
-ARG PARALLEL_VERSION=2
+ARG PARALLEL_VERSION=1.20.1
 RUN gem install parallel -v ${PARALLEL_VERSION}
 
 ARG RUBOCOP_VERSION=1.2.0
@@ -14,6 +14,7 @@ RUN gem install rubocop -v ${RUBOCOP_VERSION}
 ARG RUBOCOP_PERFORMANCE_VERSION=1.8.1
 RUN gem install rubocop-performance -v ${RUBOCOP_PERFORMANCE_VERSION}
 
+# Needed for ruby<=2.4
 ARG ACTIVESUPPORT_VERSION=5.2.4.5
 RUN gem install activesupport -v ${ACTIVESUPPORT_VERSION}
 
