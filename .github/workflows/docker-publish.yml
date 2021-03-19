@@ -77,6 +77,7 @@ jobs:
           - 1.2.0
         ruby_version:
           - 2.4.10-alpine
+          - 2.4.5-alpine
 
 
     steps:
