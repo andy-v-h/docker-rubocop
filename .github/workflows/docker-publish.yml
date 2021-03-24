@@ -12,7 +12,7 @@ jobs:
   whoAmI:
     runs-on: ubuntu-latest
     steps:
-    - run: whoami
+    - run: id -u runner
   current:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
