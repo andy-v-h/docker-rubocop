@@ -9,6 +9,10 @@ on:
   pull_request:
 
 jobs:
+  whoAmI:
+    runs-on: ubuntu-latest
+    steps:
+    - run: whoami
   current:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
